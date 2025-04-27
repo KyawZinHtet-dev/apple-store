@@ -4,11 +4,7 @@ import { products } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import SingleProduct from "@/components/products/single-product";
 
-type ProductDetailsProps = {
-  params: {
-    id: string;
-  };
-};
+type ProductDetailsProps = Promise<{ id: string }>;
 
 export async function generateStaticParams() {
   const products = await db.query.products.findMany({
@@ -24,8 +20,8 @@ export async function generateStaticParams() {
   return [];
 }
 
-const ProductDetails = async ({ params }: ProductDetailsProps) => {
-  const { id } = params;
+const ProductDetails = async (props: { params: ProductDetailsProps }) => {
+  const { id } = await props.params;
   const singleProduct = await db.query.products.findFirst({
     where: eq(products.id, id),
     with: { variants: { with: { variantImages: true, variantTags: true } } },
