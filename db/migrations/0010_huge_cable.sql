@@ -1,0 +1,1 @@
+ALTER TABLE "variant_image" RENAME COLUMN "image_url" TO "imageUrl";

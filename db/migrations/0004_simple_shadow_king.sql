@@ -1,0 +1,1 @@
+ALTER TABLE "email_verification_token" ADD CONSTRAINT "email_verification_token_email_token_pk" PRIMARY KEY("email","token");
