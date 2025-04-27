@@ -25,7 +25,7 @@ export async function generateStaticParams() {
 }
 
 const ProductDetails = async ({ params }: ProductDetailsProps) => {
-  const { id } = await params;
+  const { id } = params;
   const singleProduct = await db.query.products.findFirst({
     where: eq(products.id, id),
     with: { variants: { with: { variantImages: true, variantTags: true } } },
